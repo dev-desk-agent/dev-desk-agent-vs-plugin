@@ -1,0 +1,83 @@
+{
+  "name": "dev-desk-agent",
+  "displayName": "Dev Desk Agent",
+  "description": "Large code base assistant.",
+  "version": "0.0.1",
+  "publisher": "dev-desk-agent",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dev-desk-agent/dev-desk-agent-vs-plugin.git"
+  },
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onWebviewPanel:devDeskAgentSidebar"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devDeskAgentSidebar",
+          "title": "Dev Desk Agent",
+          "icon": "/images/icon.png"
+        }
+      ]
+    },
+    "views": {
+      "devDeskAgentSidebar": [
+        {
+          "type": "webview",
+          "id": "devDeskAgentSidebar",
+          "name": "Dev Desk Agent"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "dev-desk-agent.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "dev-desk-agent.openConfig",
+        "title": "Open Configuration",
+        "icon": "$(gear)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "dev-desk-agent.openConfig",
+          "when": "view == devDeskAgentSidebar",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run clean && pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "clean": "rimraf out"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.93.0",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "eslint": "^9.9.1",
+    "typescript": "^5.1.6",
+    "rimraf": "^5.0.1",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}
